@@ -40,8 +40,8 @@ export default function HomePage() {
                   <ArrowRight size={18} className="ml-2" />
                 </Button>
               </Link>
-              <Link href="/portfolio">
-                <Button variant="secondary" size="lg">포트폴리오</Button>
+              <Link href="/generate">
+                <Button variant="secondary" size="lg">AI 블로그 생성</Button>
               </Link>
             </div>
           </div>

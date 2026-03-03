@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { useAuthStore } from "@/stores/authStore";
-import { Code2, Menu, X, LogOut, Settings, PenSquare } from "lucide-react";
+import { Code2, Menu, X, LogOut, Settings, PenSquare, LayoutDashboard, Briefcase } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -11,10 +11,11 @@ import Button from "@/components/ui/Button";
 const navItems = [
   { href: "/", label: "Home" },
   { href: "/blog", label: "Blog" },
-  { href: "/portfolio", label: "Portfolio" },
 ];
 
 const authNavItems = [
+  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/dashboard/portfolio", label: "Portfolio", icon: Briefcase },
   { href: "/blog/editor", label: "Write", icon: PenSquare },
   { href: "/generate", label: "AI Generate", icon: Code2 },
   { href: "/settings", label: "Settings", icon: Settings },
@@ -54,21 +55,26 @@ export default function Header() {
           {user && (
             <>
               <div className="mx-2 h-5 w-px bg-gray-200" />
-              {authNavItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={cn(
-                    "flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-                    pathname === item.href
-                      ? "bg-[var(--color-accent-light)] text-[var(--color-accent)]"
-                      : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-tertiary)]"
-                  )}
-                >
-                  <item.icon size={16} />
-                  {item.label}
-                </Link>
-              ))}
+              {authNavItems.map((item) => {
+                const isActive = item.href === "/dashboard"
+                  ? pathname === "/dashboard"
+                  : pathname.startsWith(item.href);
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={cn(
+                      "flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                      isActive
+                        ? "bg-[var(--color-accent-light)] text-[var(--color-accent)]"
+                        : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-tertiary)]"
+                    )}
+                  >
+                    <item.icon size={16} />
+                    {item.label}
+                  </Link>
+                );
+              })}
             </>
           )}
         </nav>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Code2, Github } from "lucide-react";
+import { Code2 } from "lucide-react";
 import Link from "next/link";
 
 export default function Footer() {
@@ -14,7 +14,7 @@ export default function Footer() {
           </div>
           <nav className="flex gap-6 text-sm text-[var(--color-text-secondary)]">
             <Link href="/blog" className="hover:text-[var(--color-text-primary)]">Blog</Link>
-            <Link href="/portfolio" className="hover:text-[var(--color-text-primary)]">Portfolio</Link>
+            <Link href="/generate" className="hover:text-[var(--color-text-primary)]">AI Generate</Link>
           </nav>
           <p className="text-sm text-[var(--color-text-tertiary)]">
             &copy; {new Date().getFullYear()} DevLog. All rights reserved.
