@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Build
+.next/
+dist/
+build/
+*.egg-info/
+
+# Environment
+.env
+.env.local
+.env.*.local
+backend/.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Docker
+docker-compose.override.yml
+
+# MinIO data
+minio_data/
+
+# Git clones (temp)
+git_clones/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Test
+coverage/
+.pytest_cache/
+htmlcov/
