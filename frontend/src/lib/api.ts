@@ -40,6 +40,7 @@ class ApiClient {
       access_token: string;
       refresh_token: string;
       user: User;
+      is_new_user: boolean;
     }>("/api/v1/auth/google", {
       method: "POST",
       body: JSON.stringify({ credential }),

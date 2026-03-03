@@ -1,6 +1,5 @@
 "use client";
 
-import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import { api } from "@/lib/api";
 import { useAuthStore } from "@/stores/authStore";
@@ -50,7 +49,11 @@ export default function LoginPage() {
     try {
       const result = await api.googleAuth(response.credential);
       setAuth(result.access_token, result.user);
-      router.push("/");
+      if (result.is_new_user) {
+        router.push("/auth/register");
+      } else {
+        router.push("/");
+      }
     } catch (err) {
       alert("Login failed. Please try again.");
     }
