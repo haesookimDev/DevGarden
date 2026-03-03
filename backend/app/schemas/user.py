@@ -37,6 +37,7 @@ class TokenResponse(BaseModel):
     refresh_token: str
     token_type: str = "bearer"
     user: UserResponse
+    is_new_user: bool = False
 
 
 class GoogleAuthRequest(BaseModel):

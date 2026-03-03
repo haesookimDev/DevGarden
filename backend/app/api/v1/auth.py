@@ -24,12 +24,13 @@ async def google_auth(request: GoogleAuthRequest, db: AsyncSession = Depends(get
     except Exception:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid Google token")
 
-    user = await get_or_create_user(db, user_info)
+    user, is_new = await get_or_create_user(db, user_info)
 
     return TokenResponse(
         access_token=create_access_token(user.id),
         refresh_token=create_refresh_token(user.id),
         user=UserResponse.model_validate(user),
+        is_new_user=is_new,
     )
 
 

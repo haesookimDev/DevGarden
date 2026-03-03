@@ -27,14 +27,14 @@ async def verify_google_token(credential: str) -> dict:
     }
 
 
-async def get_or_create_user(db: AsyncSession, user_info: dict) -> User:
-    """Get existing user by Google ID or create new one."""
+async def get_or_create_user(db: AsyncSession, user_info: dict) -> tuple[User, bool]:
+    """Get existing user by Google ID or create new one. Returns (user, is_new)."""
     stmt = select(User).where(User.google_id == user_info["google_id"])
     result = await db.execute(stmt)
     user = result.scalar_one_or_none()
 
     if user:
-        return user
+        return user, False
 
     user = User(
         email=user_info["email"],
@@ -44,7 +44,7 @@ async def get_or_create_user(db: AsyncSession, user_info: dict) -> User:
     )
     db.add(user)
     await db.flush()
-    return user
+    return user, True
 
 
 def create_access_token(user_id: uuid.UUID) -> str:
