@@ -4,26 +4,71 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Portfolio website project. (Update this section once the tech stack is chosen and the project is initialized.)
+**DevLog** - AI-powered technical developer blog and portfolio platform.
+
+- **Frontend**: Next.js 14+ (App Router, TypeScript, Tailwind CSS)
+- **Backend**: FastAPI (Python 3.11+, SQLAlchemy 2.0, Alembic)
+- **Database**: PostgreSQL 16
+- **Object Storage**: MinIO (S3-compatible)
+- **Task Queue**: Celery + Redis
+- **AI**: Claude (default), OpenAI, Google Gemini, Private models
+- **Infrastructure**: Docker Compose (7 services)
 
 ## Build & Development Commands
 
-<!-- Update these once the project is set up -->
-<!-- Example for Next.js: -->
-<!-- npm run dev        # Start development server -->
-<!-- npm run build      # Production build -->
-<!-- npm run lint       # Run linter -->
-<!-- npm test           # Run tests -->
+```bash
+# Start all services
+docker compose up --build
+
+# Start specific service
+docker compose up backend frontend
+
+# Backend only (development)
+cd backend && uvicorn app.main:app --reload --port 8000
+
+# Frontend only (development)
+cd frontend && npm run dev
+
+# Database migration
+cd backend && alembic revision --autogenerate -m "description"
+cd backend && alembic upgrade head
+
+# Celery worker
+cd backend && celery -A app.worker.celery_app worker --loglevel=info
+```
 
 ## Architecture
 
-<!-- Document key architectural decisions here as the project evolves -->
-<!-- e.g., routing strategy, styling approach, state management, data fetching -->
+- **Authentication**: Google OAuth → JWT tokens
+- **API**: REST API with FastAPI (versioned: /api/v1/)
+- **Editor**: Hybrid Markdown + WYSIWYG (TipTap + CodeMirror)
+- **AI Generation**: Document upload / Git analysis / Portfolio → Blog auto-generation
+- **File Pipeline**: Upload → MinIO → Parse → AI Generate → Draft Post
+- **Streaming**: SSE (Server-Sent Events) for real-time AI generation
+- **Background Tasks**: Celery workers for long-running AI operations
 
 ## Project Structure
 
-<!-- Fill in once the directory structure is established -->
-
+```
+portfolio/
+├── docker-compose.yml          # Service orchestration
+├── nginx/nginx.conf            # Reverse proxy
+├── frontend/                   # Next.js app
+│   └── src/
+│       ├── app/                # Pages (App Router)
+│       ├── components/         # UI components (ui/, layout/, blog/, editor/, ai/)
+│       ├── lib/                # API client, utils
+│       └── stores/             # Zustand stores
+└── backend/                    # FastAPI app
+    └── app/
+        ├── api/v1/             # API routes
+        ├── models/             # SQLAlchemy models
+        ├── schemas/            # Pydantic schemas
+        ├── services/           # Business logic
+        ├── ai/                 # AI provider abstraction + prompts
+        ├── parsers/            # Document parsers (PDF, DOCX, PPTX)
+        └── worker/             # Celery tasks
+```
 
 ## Incremental Commits
 
@@ -39,9 +84,9 @@ Portfolio website project. (Update this section once the tech stack is chosen an
 	- The commit message should follow this structure:
 		'''
 		type: subject
-		
+
 		body(optional)
-		
+
 		footer(optional)
 		'''
 	- The type should be one of the following:
@@ -52,18 +97,18 @@ Portfolio website project. (Update this section once the tech stack is chosen an
 		- refactor: Refactoring production code
 		- test: Adding tests, refactoring test; no production code change
 		- chore: Updating build tasks, package manager configs, etc; no production code change
-		
+
 	- The subject:
 		- Must be no longer than 50 characters.
 		- Should start with a capital letter.
 		- Should not end with a period.
 		- Use an imperative tone to describe what a commit does, rather than what it did. For example, use change; not changed or changes.
-		
+
 	- The body(optional):
 		- Include this section only if the changes require additional explanation.
 		- Explain what and why the changes were made in more detail, while the code itself explains how.
 		- Ensure that each line in the body does not exceed 72 characters.
-		
+
 	- The footer(optional):
 		- Only include a footer if the user provides specific information, such as issue tracker IDs.
 
@@ -73,12 +118,12 @@ Portfolio website project. (Update this section once the tech stack is chosen an
     - Write the commit message adhering to Git commit message structure.
     - Here's an example commit message to follow:
 			style: Enhance button component design
-			
+
 			Improved button design to better address user feedback on
 			visibility and consistency across different devices. The new
 			design aims to create a more cohesive and accessible user
 			interface.
-			
+
 			- Updated color scheme to improve contrast and ensure compliance
 			  with accessibility standards.
 			- Increased font size and adjusted font weight for better
@@ -87,7 +132,7 @@ Portfolio website project. (Update this section once the tech stack is chosen an
 			  all pages.
 			- Enhanced hover and active states to provide clearer visual
 			  feedback to users.
-			
+
 			Resolves: #123
 			See also: #456, #789
     - The commit message should be concise, clear, and follow the structure outlined above.
