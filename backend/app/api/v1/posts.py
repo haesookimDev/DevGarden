@@ -32,6 +32,18 @@ async def list_posts(
     )
 
 
+@router.get("/me", response_model=list[PostResponse])
+async def list_my_posts(
+    current_user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """List all posts for the current user (including drafts)."""
+    posts, _ = await post_service.get_posts(
+        db, user_id=current_user.id, status="all", per_page=100
+    )
+    return [PostResponse.model_validate(p) for p in posts]
+
+
 @router.get("/{slug}", response_model=PostResponse)
 async def get_post(slug: str, db: AsyncSession = Depends(get_db)):
     """Get a single post by slug."""

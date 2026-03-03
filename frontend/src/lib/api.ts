@@ -71,6 +71,10 @@ class ApiClient {
     return this.request<Post>(`/api/v1/posts/${slug}`);
   }
 
+  async getMyPosts() {
+    return this.request<Post[]>("/api/v1/posts/me");
+  }
+
   async createPost(data: PostCreate) {
     return this.request<Post>("/api/v1/posts", {
       method: "POST",

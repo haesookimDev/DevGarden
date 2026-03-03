@@ -55,9 +55,9 @@ async def get_posts(
         query = query.where(Post.user_id == user_id)
     if category:
         query = query.where(Post.category == category)
-    if status:
+    if status and status != "all":
         query = query.where(Post.status == status)
-    else:
+    elif not status:
         query = query.where(Post.status == "published")
     if search:
         query = query.where(Post.title.ilike(f"%{search}%") | Post.content.ilike(f"%{search}%"))
