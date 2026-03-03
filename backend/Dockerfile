@@ -8,13 +8,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy dependency file
+# Copy dependency file and create minimal package stub for editable install
 COPY pyproject.toml .
+RUN mkdir -p app && touch app/__init__.py
 
-# Install Python dependencies
+# Install Python dependencies (editable install for module resolution)
 RUN pip install --no-cache-dir -e .
 
-# Copy application code
+# Copy application code (overlays the stub)
 COPY . .
 
 # Run database migrations and start server
