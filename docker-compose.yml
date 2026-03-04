@@ -69,7 +69,7 @@ services:
         condition: service_healthy
     volumes:
       - ./backend/app:/app/app
-      - git_clones:/tmp/git_clones
+      - ./volumes/git_clones:/tmp/git_clones
     restart: unless-stopped
 
   # --- Database ---
@@ -82,7 +82,7 @@ services:
       POSTGRES_USER: devlog
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-devlog_secret}
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ./volumes/postgres_data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U devlog"]
       interval: 5s
@@ -100,7 +100,7 @@ services:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin123}
     volumes:
-      - minio_data:/data
+      - ./volumes/minio_data:/data
     command: server /data --console-address ":9001"
     restart: unless-stopped
 
@@ -110,7 +110,7 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      - redis_data:/data
+      - ./volumes/redis_data:/data
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s
