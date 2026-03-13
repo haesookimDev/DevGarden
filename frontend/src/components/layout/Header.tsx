@@ -32,7 +32,7 @@ export default function Header() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           <Code2 size={28} className="text-[var(--color-accent)]" />
-          <span className="text-xl font-bold tracking-tight">DevLog</span>
+          <span className="text-xl font-bold tracking-tight">DevGarden</span>
         </Link>
 
         {/* Desktop Nav */}

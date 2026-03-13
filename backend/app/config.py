@@ -3,12 +3,12 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     # App
-    app_name: str = "DevLog API"
+    app_name: str = "DevGarden API"
     debug: bool = False
     secret_key: str = "change-this-to-a-random-secret-key"
 
     # Database
-    database_url: str = "postgresql+asyncpg://devlog:devlog_secret@postgres:5432/devlog"
+    database_url: str = "postgresql+asyncpg://devgarden:devgarden_secret@postgres:5432/devgarden"
 
     # Redis
     redis_url: str = "redis://redis:6379/0"

@@ -31,7 +31,7 @@ MAX_TOTAL_CONTENT = 200_000  # 200KB total for AI prompt
 
 def clone_repo(repo_url: str, access_token: str | None = None) -> str:
     """Clone a repository and return the path."""
-    clone_dir = tempfile.mkdtemp(prefix="devlog_git_")
+    clone_dir = tempfile.mkdtemp(prefix="devgarden_git_")
 
     if access_token and "github.com" in repo_url:
         repo_url = repo_url.replace("https://", f"https://{access_token}@")

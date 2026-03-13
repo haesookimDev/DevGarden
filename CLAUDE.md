@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**DevLog** - AI-powered technical developer blog and portfolio platform.
+**DevGarden** - AI-powered technical developer blog and portfolio platform.
 
 - **Frontend**: Next.js 14+ (App Router, TypeScript, Tailwind CSS)
 - **Backend**: FastAPI (Python 3.11+, SQLAlchemy 2.0, Alembic)

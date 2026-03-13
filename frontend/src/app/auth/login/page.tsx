@@ -67,7 +67,7 @@ export default function LoginPage() {
             <Code2 size={32} className="text-[var(--color-accent)]" />
           </div>
         </div>
-        <h1 className="mb-2 text-2xl font-bold">Welcome to DevLog</h1>
+        <h1 className="mb-2 text-2xl font-bold">Welcome to DevGarden</h1>
         <p className="mb-8 text-sm text-[var(--color-text-secondary)]">
           Sign in with your Google account to start creating.
         </p>

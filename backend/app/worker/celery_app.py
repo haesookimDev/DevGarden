@@ -3,7 +3,7 @@ from celery import Celery
 from app.config import settings
 
 celery = Celery(
-    "devlog",
+    "devgarden",
     broker=settings.redis_url,
     backend=settings.redis_url,
     include=["app.worker.tasks"],

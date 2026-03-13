@@ -7,9 +7,9 @@ from minio.error import S3Error
 
 from app.config import settings
 
-BUCKET_IMAGES = "devlog-images"
-BUCKET_DOCUMENTS = "devlog-documents"
-BUCKET_AVATARS = "devlog-avatars"
+BUCKET_IMAGES = "devgarden-images"
+BUCKET_DOCUMENTS = "devgarden-documents"
+BUCKET_AVATARS = "devgarden-avatars"
 
 
 class StorageService:

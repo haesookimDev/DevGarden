@@ -10,14 +10,14 @@ export default function Footer() {
         <div className="flex flex-col items-center gap-4 md:flex-row md:justify-between">
           <div className="flex items-center gap-2">
             <Code2 size={20} className="text-[var(--color-accent)]" />
-            <span className="font-bold">DevLog</span>
+            <span className="font-bold">DevGarden</span>
           </div>
           <nav className="flex gap-6 text-sm text-[var(--color-text-secondary)]">
             <Link href="/blog" className="hover:text-[var(--color-text-primary)]">Blog</Link>
             <Link href="/generate" className="hover:text-[var(--color-text-primary)]">AI Generate</Link>
           </nav>
           <p className="text-sm text-[var(--color-text-tertiary)]">
-            &copy; {new Date().getFullYear()} DevLog. All rights reserved.
+            &copy; {new Date().getFullYear()} DevGarden. All rights reserved.
           </p>
         </div>
       </div>

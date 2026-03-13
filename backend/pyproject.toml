@@ -1,7 +1,7 @@
 [project]
-name = "devlog-backend"
+name = "devgarden-backend"
 version = "0.1.0"
-description = "DevLog - Technical Developer Blog Platform Backend"
+description = "DevGarden - Technical Developer Blog Platform Backend"
 requires-python = ">=3.11"
 dependencies = [
     "fastapi>=0.115.0",

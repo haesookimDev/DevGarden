@@ -5,7 +5,7 @@ import Footer from "@/components/layout/Footer";
 import { AuthProvider } from "@/components/layout/AuthProvider";
 
 export const metadata: Metadata = {
-  title: "DevLog - Technical Developer Blog",
+  title: "DevGarden - Technical Developer Blog",
   description: "A developer portfolio and technical blog platform with AI-powered content generation",
 };
 
